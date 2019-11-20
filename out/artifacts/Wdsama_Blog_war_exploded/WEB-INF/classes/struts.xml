@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+        <!DOCTYPE struts PUBLIC
+                "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+                "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+
+        <package name="struts" extends="struts-default">
+
+<!--        <action name="account_*" class="AccountAction" method="{1}"></action>-->
+                <action name="admin_*" class="LoginAction" method="{1}">
+                        <result name="login">/mgr_login.jsp</result>
+                        <!--重定向 为了改变请求体-->
+                        <result name="success" type="redirect">/mgr_index.jsp</result>
+                        <!--重定向-->
+                        <result name="loginOut" type="redirect">/mgr_login.jsp</result>
+                        <!--由于struts版本的问题  必须加上👇这个 来允许请求的访问-->
+                        <allowed-methods>login,loginOut</allowed-methods>
+                </action>
+                <action name="category_*" class="CategoryAction" method="{1}">
+                    <result name="list">/mgr_category.jsp</result>
+                    <!--重定向 跳转到 list 向页面展示最新的数据-->
+                    <result name="listAction" type="redirectAction">category_list</result>
+                    <allowed-methods>add,list,updateUI,update</allowed-methods>
+                </action>
+
+        </package>
+</struts>

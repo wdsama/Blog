@@ -1,0 +1,19 @@
+1、遇到的第一个问题：
+        在整合hibernate的时候 使用spring对hibernate进行配置时
+        <property name="mappingResources">
+        由于是直接copy的上一个工程 所以 文件路径找不到 导致tomcat启动失败
+        报错信息：“One or more listeners failed to start”
+            补充：如果在***.hbm.xml 中 class name="top.wdsama.domain.User" table="user"> 缺少 name和table属性 或者 属性值错误
+                    都会导致tomcat无法启动
+2、将struts中的action交给spring管理时
+        将action设置为多例模式
+        scope="prototype"
+3、${pageContext.request.contextPath} 使用时
+    ${pageContext.request.contextPath} 后面一定要加上 /***  不然会从 ***这个根目录开始访问 导致访问不到action
+4、因为在配置 hibernate 时 进行了事务增强 所以需要在  具有插入和更新方法 的 Service 加上 @Transactional
+5、Ajax 格式 $.post("地址"，{参数}，function(data){},"json")
+    后台返回的 json 数据存放在 data 里面
+6、以json的格式响应给前端页面需要导入相关的jar包
+7、redirectAction 和 redirect 是有区别的
+    区别： redirectAction 重定向时 只需要填写配置好的Action地址名称 不需要加上 .action后缀
+           redirect  需要在地址后面加上 action 后缀

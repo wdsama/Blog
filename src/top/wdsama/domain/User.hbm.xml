@@ -1,0 +1,14 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+        <!--第N次 忘记在Class上面配置属性 name 和 table 导致发生 "说明笔记中的第一种情况"-->
+<hibernate-mapping>
+<class name="top.wdsama.domain.User" table="user">
+    <id name="id" column="id">
+        <generator class="native"></generator>
+    </id>
+    <property name="username" column="username"/>
+    <property name="password" column="password"/>
+</class>
+</hibernate-mapping>
