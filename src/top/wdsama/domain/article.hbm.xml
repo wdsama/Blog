@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="top.wdsama.domain.Article" table="article">
+        <id name="articleId" column="article_id">
+            <generator class="native"></generator>
+        </id>
+        <property name="articleTitle" column="article_title"/>
+        <property name="articleContent" column="article_content"/>
+        <property name="articleTime" column="article_time"/>
+        <property name="articlePic" column="article_pic"/>
+        <property name="articleDesc" column="article_desc"/>
+        <many-to-one name="category" class="top.wdsama.domain.Category" column="article_cid"/>
+    </class>
+
+</hibernate-mapping>

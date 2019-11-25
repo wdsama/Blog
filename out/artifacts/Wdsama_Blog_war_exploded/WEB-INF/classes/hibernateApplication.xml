@@ -38,6 +38,7 @@
             <list>
                 <value>top/wdsama/domain/User.hbm.xml</value>
                 <value>top/wdsama/domain/category.hbm.xml</value>
+                <value>top/wdsama/domain/article.hbm.xml</value>
             </list>
         </property>
     </bean>

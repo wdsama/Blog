@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -16,7 +17,8 @@
 
 </head>
 <body style="background:#f3f3f3;">
-
+<%--开启开发者模式的标志--%>
+<%--<s:debug/>--%>
 <div class="main_top">
     <div class="am-cf am-padding am-padding-bottom-0">
         <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">文章管理
@@ -37,7 +39,8 @@
         </div>
         <div class="am-u-sm-12 am-u-md-3">
             <div class="am-input-group am-input-group-sm">
-                <input type="text" class="am-form-field" id="input_search">
+                <%--从 parameters中 获取上一次条件搜索的值 便于 下一页 或者 页码搜索的准确性--%>
+                <input type="text" class="am-form-field" id="input_search" value="<s:property value="#parameters.keyWord"/>">
                 <span class="am-input-group-btn">
                     <button class="am-btn am-btn-default" type="button" id="input_search_btn">搜索</button>
                 </span>
@@ -51,17 +54,15 @@
         <li>序号</li>
         <li>标题</li>
         <li>学科</li>
-        <li>技能</li>
         <li>编辑</li>
         <li>删除</li>
     </ul>
 
-    <s:iterator value="list">
+    <s:iterator value="list" var="article">
         <ul class="list_goods_ul">
-            <li>aaa</li>
-            <li>bbb</li>
-            <li>ccc</li>
-            <li>ddd</li>
+            <li><s:property value="#article.articleId"/></li>
+            <li><s:property value="#article.articleTitle"/></li>
+            <li><s:property value="#article.category.cname"/></li>
             <li>
                 <a href="#">
                 <img class="img_icon" src="${ctx }/images/edit_icon.png" alt=""></a>
@@ -83,18 +84,22 @@
     
     //分页
     $("#page").paging({
-        pageNo:1,
-        totalPage: 5,
-        totalSize: 3,
+        pageNo:<s:property value="currentPage"/>,
+        totalPage: <s:property value="totalPage"/>,
+        totalSize: <s:property value="totalCount"/>,
         callback: function(num) {
-          /*  $(window).attr('location','/article_list.action?currPage='+num);*/
-            alert(num);
+            var keyWord = $("#input_search").val();
+            $(window).attr('location','${pageContext.request.contextPath}/article_pageList.action?currPage='+num+"&keyWord="+keyWord);
         }
     });
 
     $("#add").click(function () {
         alert("aaa");
         $(window).attr('location','${ctx }/mgr_add_article.jsp');
+    });
+    $("#input_search_btn").click(function () {
+        var keyWord = $("#input_search").val();
+        $(window).attr('location','${pageContext.request.contextPath}/article_pageList.action?keyWord='+keyWord);
     });
 </script>
 

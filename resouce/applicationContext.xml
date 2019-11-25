@@ -40,6 +40,16 @@
     <bean id="CategoryDao" class="top.wdsama.dao.impl.CategoryDaoImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
-
-
+    <!--文章Action-->
+    <bean id="ArticleAction" class="top.wdsama.web.ArticleAction" scope="prototype">
+         <property name="articleService" ref="ArticleService"/>
+    </bean>
+    <!--文章Service-->
+    <bean id="ArticleService" class="top.wdsama.service.impl.ArticleServiceImpl">
+        <property name="articleDao" ref="ArticleDao"/>
+    </bean>
+    <!--文章Dao-->
+    <bean id="ArticleDao" class="top.wdsama.dao.impl.ArticleDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
 </beans>

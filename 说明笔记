@@ -17,3 +17,11 @@
 7、redirectAction 和 redirect 是有区别的
     区别： redirectAction 重定向时 只需要填写配置好的Action地址名称 不需要加上 .action后缀
            redirect  需要在地址后面加上 action 后缀
+8、hibernate 延迟加载的问题
+    因为 hibernate 的业务是在Service中完成的  所以在执行完Service后 会自动关闭 Session
+        导致在Web层调用相关联的类时 发生 no Session 的异常
+       解决方法： 在web.xml 中 配置一个spring 的过滤器 “OpenSessionInViewFilter”
+            这个过滤器的作用是： 将 Session 的交给 Web 层管理
+              这样再次在 Web 进行延迟加载时 就不会因为 Session 被关闭而发生异常了
+
+      注意！！：  这个配置的过滤器必须在 Struts2 的核心过滤器的前面

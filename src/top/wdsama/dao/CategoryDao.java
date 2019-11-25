@@ -36,4 +36,9 @@ public interface CategoryDao {
      */
     void update(Category category);
 
+    /**
+     * 删除一条分类
+     * @param category
+     */
+    void delete(Category category);
 }

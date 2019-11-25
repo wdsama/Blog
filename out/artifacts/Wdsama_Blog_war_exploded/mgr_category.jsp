@@ -64,7 +64,8 @@
             <li><s:property value="#category.parentId"/></li>
             <li><s:property value="#category.cname"/></li>
             <li><a href="#" class="updateBtn" data-id="<s:property value="#category.cid"/>"><img class="img_icon" src="images/edit_icon.png" alt=""></a></li>
-            <li><a href="#"><img class="img_icon" src="images/delete_icon.png" alt=""></a></li>
+            <li><a href="${pageContext.request.contextPath}/category_delete?cid=<s:property value="#category.cid"/>">
+                <img class="img_icon" src="images/delete_icon.png" alt=""></a></li>
             </ul>
         </s:iterator>
 

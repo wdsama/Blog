@@ -68,4 +68,9 @@ public class CategoryAction extends ActionSupport implements ModelDriven<Categor
         categoryService.update(category);
         return "listAction";
     }
+
+    public String delete(){
+        categoryService.delete(category);
+        return "listAction";
+    }
 }
