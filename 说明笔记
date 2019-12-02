@@ -25,3 +25,10 @@
               这样再次在 Web 进行延迟加载时 就不会因为 Session 被关闭而发生异常了
 
       注意！！：  这个配置的过滤器必须在 Struts2 的核心过滤器的前面
+9、如果进行 删除 更新 插入 时 再业务层没有 加上 @Transactional 注解
+    就会出现 Write operations are not allowed in read-only mode (FlushMode.MANUAL):
+     Turn your Session into FlushMode.COMMIT/AUTO or remove 'readOnly' marker from transaction definition.
+     异常！！
+     解决方法 ： 在业务层 加上  @Transactional 注解
+10、由于 struts2 不支持 umedit 富文本编辑器 所以 需要 自行配置过滤器 对来自富文本过滤器的请求进行放行
+     注意：自行配置过滤器后 需要将 web.xml 中的 struts2 核心过滤器 改为自己创建的过滤器、

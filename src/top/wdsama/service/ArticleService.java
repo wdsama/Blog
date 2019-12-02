@@ -27,4 +27,10 @@ public interface ArticleService {
      * @return
      */
     PageBean getPageData(DetachedCriteria detachedCriteria, Integer currPage, int pageSize);
+
+    /**
+     * 删除
+     * @param article
+     */
+    void delete(Article article);
 }

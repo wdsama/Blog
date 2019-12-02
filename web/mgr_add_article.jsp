@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="${ctx }/css/style.css" type="text/css" />
     <link rel="stylesheet" href="${ctx }/css/amazeui.min.css" />
     <script src="${ctx }/js/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${ctx }/js/umedit/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${ctx }/js/umedit/ueditor.all.min.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="${ctx }/js/umedit/lang/zh-cn/zh-cn.js"></script>
 </head>
 <body>
 
@@ -22,7 +25,7 @@
         </strong><small></small></div>
     </div>
     <hr>
-    <form id="blog_form" action="#" method=post >
+    <form id="blog_form" action="article_add.action" method="post" enctype="multipart/form-data">
         <div class="edit_content">
             <div class="item1">
                 <div>
@@ -37,11 +40,10 @@
             <div class="item1">
                 <span>所属分类：</span>
                     <select id="category_select" name="bclass.cid" style="width: 150px">&nbsp;&nbsp;
-                        　<option value="aaa">aaa</option>
+                        　
                     </select>
 
                 <select id="skill_select" name="skill.sid" style="width: 150px">&nbsp;&nbsp;
-                    <option value="aaa">aa</option>
                 </select>
 
             </div>
@@ -61,6 +63,53 @@
     </form>
 
 </div>
+<script>
+    $(function () {
+    /*初始化富文本编辑器*/
+        var ue = UE.getEditor('editor');
 
+        $.post("${pageContext.request.contextPath}/category_getCategory.action",{"PId":0},function (data) {
+            console.log(data)
+            $(data).each(function (i,obj) {
+                $("#category_select").append("<option value="+obj.cid+">"+obj.cname+"</option>")
+            })
+            /*触发change事件 获取默认行数据*/
+            $("#category_select").trigger("change")
+        },"json");
+
+    })
+    $("#category_select").on("change",function () {
+        var cid = $("#category_select").val();
+        $("#skill_select").empty();
+        $.post("${pageContext.request.contextPath}/category_getCategory.action",{"PId":cid},function (data) {
+            $(data).each(function (i,obj) {
+                $("#skill_select").append("<option value="+obj.cid+">"+obj.cname+"</option>")
+            })
+        },"json");
+    });
+    /*原理是把本地图片路径："D(盘符):/image/..."转为"http://..."格式路径来进行显示图片*/
+    $("#fileupload").change(function() {
+        var $file = $(this);
+        var objUrl = $file[0].files[0];
+        //获得一个http格式的url路径:mozilla(firefox)||webkit or chrome
+        var windowURL = window.URL || window.webkitURL;
+        //createObjectURL创建一个指向该参数对象(图片)的URL
+        var dataURL;
+        dataURL = windowURL.createObjectURL(objUrl);
+        $("#imageview").attr("src",dataURL);
+        console.log($('#imageview').attr('style'));
+        if($('#imageview').attr('style') === 'display: none;'){
+            $('#imageview').attr('style','inline');
+            $('#imageview').width("300px");
+            $('#imageview').height("200px");
+            $('.update_pic').attr('style', 'margin-bottom: 80px;');
+        }
+    });
+
+    $("#send").click(function () {
+            $("#blog_form").submit();
+    });
+
+</script>
 </body>
 </html>

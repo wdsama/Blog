@@ -68,7 +68,7 @@
                 <img class="img_icon" src="${ctx }/images/edit_icon.png" alt=""></a>
             </li>
             <li>
-                <a href="#">
+                <a href="${ctx }/article_delete?id=<s:property value="#article.articleId"/>">
                     <img class="img_icon" src="${ctx }/images/delete_icon.png" alt="">
                 </a>
             </li>
@@ -94,7 +94,6 @@
     });
 
     $("#add").click(function () {
-        alert("aaa");
         $(window).attr('location','${ctx }/mgr_add_article.jsp');
     });
     $("#input_search_btn").click(function () {

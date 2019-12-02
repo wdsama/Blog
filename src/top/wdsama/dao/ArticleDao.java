@@ -34,4 +34,10 @@ public interface ArticleDao {
      * @return
      */
     List<Article> getPageDate(DetachedCriteria detachedCriteria, Integer index, Integer pageSize);
+
+    /**
+     * 删除
+     * @param article
+     */
+    void delete(Article article);
 }

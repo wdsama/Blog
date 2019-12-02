@@ -49,4 +49,9 @@ public class ArticleDaoImpl extends HibernateDaoSupport implements ArticleDao {
         List<Article> list = (List<Article>)this.getHibernateTemplate().findByCriteria(detachedCriteria, index, pageSize);
         return list;
     }
+
+    @Override
+    public void delete(Article article) {
+        this.getHibernateTemplate().delete(article);
+    }
 }

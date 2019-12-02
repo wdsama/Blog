@@ -10,6 +10,7 @@ import org.apache.struts2.ServletActionContext;
 import top.wdsama.domain.Category;
 import top.wdsama.service.CategoryService;
 
+import javax.servlet.ServletContext;
 import java.io.IOException;
 import java.util.List;
 
@@ -54,7 +55,6 @@ public class CategoryAction extends ActionSupport implements ModelDriven<Categor
          * 以json(数据格式)响应给前端页面
          */
         JSONArray jsonArray = JSONArray.fromObject(category, new JsonConfig());
-        System.out.println(jsonArray);
         ServletActionContext.getResponse().setContentType("text/html;charset=UTF-8");
         try {
             ServletActionContext.getResponse().getWriter().println(jsonArray.toString());
@@ -73,4 +73,15 @@ public class CategoryAction extends ActionSupport implements ModelDriven<Categor
         categoryService.delete(category);
         return "listAction";
     }
+
+    @Setter
+    private Long PId;
+    public String getCategory() throws IOException {
+        List<Category> list = categoryService.getCategory(PId);
+        JSONArray jsonArray = JSONArray.fromObject(list,new JsonConfig());
+        ServletActionContext.getResponse().setContentType("text/html;charset=UTF-8");
+        ServletActionContext.getResponse().getWriter().println(jsonArray);
+        return null;
+    }
+
 }

@@ -2,6 +2,7 @@ package top.wdsama.service.impl;
 
 import lombok.Setter;
 import org.hibernate.criterion.DetachedCriteria;
+import org.springframework.transaction.annotation.Transactional;
 import top.wdsama.dao.ArticleDao;
 import top.wdsama.domain.Article;
 import top.wdsama.domain.PageBean;
@@ -16,6 +17,7 @@ import java.util.List;
  * @Date 2019/11/23 10:21
  * @Version 1.0
  */
+@Transactional
 public class ArticleServiceImpl implements ArticleService {
     @Setter
     private ArticleDao articleDao;
@@ -45,5 +47,10 @@ public class ArticleServiceImpl implements ArticleService {
         articlePageBean.setList(list);
         System.out.println(articlePageBean);
         return articlePageBean;
+    }
+
+    @Override
+    public void delete(Article article) {
+        articleDao.delete(article);
     }
 }

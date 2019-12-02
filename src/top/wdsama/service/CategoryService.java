@@ -42,4 +42,11 @@ public interface CategoryService {
      */
     void delete(Category category);
 
+    /**
+     * 添加 文章 时 异步查询分类
+     * @param pId
+     * @return
+     */
+    List<Category> getCategory(Long pId);
+
 }

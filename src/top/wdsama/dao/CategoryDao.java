@@ -41,4 +41,11 @@ public interface CategoryDao {
      * @param category
      */
     void delete(Category category);
+
+    /**
+     * 添加文章时 异步查询 分类
+     * @param pId
+     * @return
+     */
+    List<Category> getCategory(Long pId);
 }

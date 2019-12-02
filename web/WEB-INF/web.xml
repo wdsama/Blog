@@ -31,7 +31,9 @@
     <!--struts2核心过滤器-->
     <filter>
         <filter-name>struts2</filter-name>
-        <filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>
+<!--        <filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>-->
+        <!--自制过滤器  实现富文本 过滤器-->
+        <filter-class>top.wdsama.web.MyFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>struts2</filter-name>

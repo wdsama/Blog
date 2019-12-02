@@ -48,4 +48,10 @@ public class CategoryServiceImpl implements CategoryService {
 
         categoryDao.delete(category);
     }
+
+    @Override
+    public List<Category> getCategory(Long pId) {
+        List<Category> list = categoryDao.getCategory(pId);
+        return list;
+    }
 }

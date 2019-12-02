@@ -51,4 +51,12 @@ public class CategoryDaoImpl extends HibernateDaoSupport implements CategoryDao 
     public void delete(Category category) {
         this.getHibernateTemplate().delete(category);
     }
+
+    @Override
+    public List<Category> getCategory(Long pId) {
+        DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Category.class);
+        detachedCriteria.add(Restrictions.eq("parentId",pId));
+        List<Category> list = (List<Category>)this.getHibernateTemplate().findByCriteria(detachedCriteria);
+        return list;
+    }
 }
